@@ -1,16 +1,37 @@
 .order {
-  padding: 32px 0 60px;
+  &__container {
+    padding: 32px 0 60px;
 
-  @media (min-width: 768px) {
-    padding: 60px 0 80px;
+    @media (min-width: 768px) {
+      padding: 60px 0 80px;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 60px 149px 100px;
+    }
+
+    @media (min-width: 1440px) {
+      padding: 60px 304px 100px;
+    }
   }
 
-  @media (min-width: 1024px) {
-    padding: 60px 106px 100px;
-  }
+  &__wrapper {
+    border: 1px solid #eeeff2;
+    border-radius: 16px;
+    padding: 24px 16px;
+    margin: 0 auto;
 
-  @media (min-width: 1024px) {
-    padding: 60px 212px 100px;
+    @media (min-width: 768px) {
+      padding: 60px 151px;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 60px 159px;
+    }
+
+    @media (min-width: 1440px) {
+      padding: 60px 212px;
+    }
   }
 
   &__info {
