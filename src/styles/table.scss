@@ -1,0 +1,25 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  &__title {
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 4px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eeeff2;
+    padding: 8px 0;
+  }
+
+  &__filed {
+    color: #969eae;
+  }
+
+  &__value {
+    text-align: right;
+  }
+}

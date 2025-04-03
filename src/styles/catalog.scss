@@ -1,0 +1,44 @@
+.catalog {
+  overflow-x: hidden;
+  padding-bottom: 20px;
+
+  @media (min-width: 768px) {
+    padding-bottom: 32px;
+  }
+
+  @media (min-width: 1024px) {
+    padding-bottom: 40px;
+  }
+
+  &__list {
+    overflow-x: auto;
+    display: flex;
+    gap: 4px;
+  }
+
+  &__link {
+    display: block;
+    padding: 11px 14px 13px;
+    border-radius: 32px;
+    background-color: #eeeff2;
+    color: #969eae;
+    outline: none;
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus-visible:not(&_active) {
+      color: #0044f0;
+      border-color: #0044f0;
+    }
+
+    &:active,
+    &_active {
+      color: #ffffff;
+      background-color: #0044f0;
+    }
+
+    &_active {
+      pointer-events: none;
+    }
+  }
+}

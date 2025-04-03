@@ -1,0 +1,25 @@
+.breadcrumb {
+  padding-bottom: 24px;
+
+  @media (min-width: 768px) {
+    padding-bottom: 32px;
+  }
+
+  @media (min-width: 1024px) {
+    padding-bottom: 40px;
+  }
+
+  &__list {
+    display: flex;
+    gap: 6px;
+    color: #969eae;
+  }
+
+  &__item:not(:last-child) {
+    display: flex;
+    gap: 6px;
+    &::after {
+      content: '\003E';
+    }
+  }
+}

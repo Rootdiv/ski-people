@@ -1,0 +1,78 @@
+.order {
+  padding: 32px 0 60px;
+
+  @media (min-width: 768px) {
+    padding: 60px 0 80px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 60px 106px 100px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 60px 212px 100px;
+  }
+
+  &__info {
+    display: grid;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 400;
+
+    @media (min-width: 768px) {
+      grid-template-areas: 'title price' 'number .';
+      font-size: 20px;
+      gap: 12px;
+    }
+  }
+
+  &__title {
+    @media (min-width: 768px) {
+      grid-area: title;
+    }
+  }
+
+  &__price {
+    @media (min-width: 768px) {
+      grid-area: price;
+      justify-self: flex-end;
+    }
+  }
+
+  &__number {
+    font-size: 12px;
+    padding: 4px 8px;
+    width: max-content;
+    border-radius: 32px;
+    background-color: #eeeff2;
+
+    @media (min-width: 768px) {
+      grid-area: number;
+    }
+  }
+
+  &__table {
+    margin: 20px 0 24px;
+  }
+
+  &__link-button {
+    display: block;
+    text-align: center;
+    padding: 12px 0;
+    color: #ffffff;
+    border: 1px solid transparent;
+    background-color: #0044f0;
+    border-radius: 32px;
+    outline: none;
+    width: 100%;
+
+    &:hover {
+      background-color: #0945de;
+    }
+
+    &:focus-visible {
+      background-color: #0044f0;
+      border-color: #042f9c;
+    }
+  }
+}

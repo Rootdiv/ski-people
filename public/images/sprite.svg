@@ -3,16 +3,16 @@
     <path stroke="#1C1C1C" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
       d="M7.666 14a6.333 6.333 0 1 0 0-12.667 6.333 6.333 0 0 0 0 12.667ZM14.666 14.667l-1.333-1.334" />
   </symbol>
-  <symbol id="favorites" viewBox="0 0 16 16" fill="none">
-    <path stroke="#1C1C1C" stroke-linecap="round" stroke-linejoin="round"
+  <symbol id="favorites" viewBox="0 0 16 16">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
       d="M8.414 13.873c-.227.08-.6.08-.827 0-1.933-.66-6.253-3.413-6.253-8.08 0-2.06 1.66-3.726 3.706-3.726 1.213 0 2.287.586 2.96 1.493a3.687 3.687 0 0 1 2.96-1.493c2.047 0 3.707 1.666 3.707 3.726 0 4.667-4.32 7.42-6.253 8.08Z" />
   </symbol>
   <symbol id="cart" viewBox="0 0 16 16" fill="none">
-    <path stroke="#1C1C1C" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
-      d="M5.873 1.333 3.46 3.753M10.127 1.333l2.413 2.42" />
-    <path stroke="#1C1C1C"
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+      stroke-miterlimit="10" d="M5.873 1.333 3.46 3.753M10.127 1.333l2.413 2.42" />
+    <path stroke="currentColor"
       d="M1.333 5.233c0-1.233.66-1.333 1.48-1.333h10.374c.82 0 1.48.1 1.48 1.333 0 1.434-.66 1.334-1.48 1.334H2.814c-.82 0-1.48.1-1.48-1.334Z" />
-    <path stroke="#1C1C1C" stroke-linecap="round"
+    <path stroke="currentColor" stroke-linecap="round"
       d="M6.507 9.333V11.7M9.573 9.333V11.7M2.333 6.667l.94 5.76c.214 1.293.727 2.24 2.634 2.24h4.02c2.073 0 2.38-.907 2.62-2.16l1.12-5.84" />
   </symbol>
   <symbol id="phone" viewBox="0 0 16 16" fill="none">

@@ -1,0 +1,82 @@
+.footer {
+  background-color: #1c1c1c;
+  padding: 40px 0;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-areas:
+        'logo logo logo'
+        'developers social copyright';
+      align-items: flex-end;
+    }
+  }
+
+  &__logo {
+    @media (min-width: 768px) {
+      grid-area: logo;
+      place-self: center;
+    }
+
+    &-link {
+      display: inline-block;
+    }
+
+    &-icon {
+      width: 164px;
+      height: 35px;
+
+      @media (min-width: 768px) {
+        width: 275px;
+        height: 60px;
+      }
+    }
+  }
+
+  &__social {
+    @media (min-width: 768px) {
+      grid-area: social;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &-phone {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    &-list {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+  }
+
+  &__developer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #f1e9e4;
+
+    @media (min-width: 768px) {
+      grid-area: developers;
+    }
+  }
+
+  &__copyright {
+    color: #f1e9e4;
+
+    @media (min-width: 768px) {
+      grid-area: copyright;
+      place-self: flex-end;
+    }
+  }
+}
