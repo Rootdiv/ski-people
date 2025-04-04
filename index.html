@@ -57,7 +57,7 @@
       </div>
     </header>
     <main>
-      <div class="catalog">
+      <div class="catalog" hidden>
         <div class="container">
           <ul class="catalog__list">
             <li class="catalog__item">
@@ -78,7 +78,7 @@
           </ul>
         </div>
       </div>
-      <div class="breadcrumb">
+      <div class="breadcrumb" hidden>
         <div class="container">
           <nav class="breadcrumb__navigation">
             <ul class="breadcrumb__list">
@@ -95,7 +95,7 @@
           </nav>
         </div>
       </div>
-      <section class="goods">
+      <section class="goods" hidden>
         <div class="container">
           <h2 class="goods__title">Избранное</h2>
           <ul class="goods__list">
@@ -310,22 +310,85 @@
         <div class="container">
           <h2 class="product__title">Горные лыжи</h2>
           <div class="product__description">
-            <div class="product__slider">
-              <img src="/images/photo.jpg" alt="" class="product__slider-image" />
-              <ul class="product__slider-thumbnails slider-thumbnails">
-                <li class="slider-thumbnails__item">
-                  <img src="/images/photo-1.jpg" alt="" class="slider-thumbnails__image" />
-                </li>
-                <li class="slider-thumbnails__item">
-                  <img src="/images/photo-1.jpg" alt="" class="slider-thumbnails__image" />
-                </li>
-                <li class="slider-thumbnails__item">
-                  <img src="/images/photo-1.jpg" alt="" class="slider-thumbnails__image" />
-                </li>
-                <li class="slider-thumbnails__item">
-                  <img src="/images/photo-1.jpg" alt="" class="slider-thumbnails__image" />
-                </li>
-              </ul>
+            <div class="product__images">
+              <div class="swiper product__slider">
+                <ul class="swiper-wrapper product__slider-image slider-image">
+                  <li class="swiper-slide slider-image__slide">
+                    <img class="slider-image__img" src="/images/photo.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-image__slide">
+                    <img class="slider-image__img" src="/images/photo.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-image__slide">
+                    <img class="slider-image__img" src="/images/photo.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-image__slide">
+                    <img class="slider-image__img" src="/images/photo.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-image__slide">
+                    <img class="slider-image__img" src="/images/photo.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-image__slide">
+                    <img class="slider-image__img" src="/images/photo.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-image__slide">
+                    <img class="slider-image__img" src="/images/photo.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-image__slide">
+                    <img class="slider-image__img" src="/images/photo.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-image__slide">
+                    <img class="slider-image__img" src="/images/photo.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-image__slide">
+                    <img class="slider-image__img" src="/images/photo.jpg" />
+                  </li>
+                </ul>
+                <button type="button" class="product__slider-arrow product__slider-arrow_prev">
+                  <svg width="32" height="32" class="product__slider-arrow-svg">
+                    <use href="/images/sprite.svg#prev" />
+                  </svg>
+                </button>
+                <button type="button" class="product__slider-arrow product__slider-arrow_next">
+                  <svg width="32" height="32" class="product__slider-arrow-svg">
+                    <use href="/images/sprite.svg#next" />
+                  </svg>
+                </button>
+              </div>
+              <div class="swiper product__slider-thumbnails slider-thumbnails">
+                <ul class="swiper-wrapper slider-thumbnails__list">
+                  <li class="swiper-slide slider-thumbnails__item">
+                    <img class="slider-thumbnails__image" src="/images/photo-1.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-thumbnails__item">
+                    <img class="slider-thumbnails__image" src="/images/photo-1.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-thumbnails__item">
+                    <img class="slider-thumbnails__image" src="/images/photo-1.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-thumbnails__item">
+                    <img class="slider-thumbnails__image" src="/images/photo-1.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-thumbnails__item">
+                    <img class="slider-thumbnails__image" src="/images/photo-1.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-thumbnails__item">
+                    <img class="slider-thumbnails__image" src="/images/photo-1.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-thumbnails__item">
+                    <img class="slider-thumbnails__image" src="/images/photo-1.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-thumbnails__item">
+                    <img class="slider-thumbnails__image" src="/images/photo-1.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-thumbnails__item">
+                    <img class="slider-thumbnails__image" src="/images/photo-1.jpg" />
+                  </li>
+                  <li class="swiper-slide slider-thumbnails__item">
+                    <img class="slider-thumbnails__image" src="/images/photo-1.jpg" />
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="product__info">
               <p class="product__info-price">5&nbsp;000&nbsp;&#8381;</p>
@@ -369,7 +432,7 @@
           </div>
         </div>
       </section>
-      <section class="cart">
+      <section class="cart" hidden>
         <div class="container">
           <h2 class="cart__title">Корзина</h2>
           <ul class="cart__list">
@@ -439,7 +502,7 @@
           </form>
         </div>
       </section>
-      <section class="order">
+      <section class="order" hidden>
         <div class="container order__container">
           <div class="order__wrapper">
             <div class="order__info">
