@@ -22,7 +22,9 @@ export const cart = () => {
     <div class="cart__order">
       <h3 class="cart__order-title">Оформление</h3>
       <div class="cart__order-info">
-        <p class="cart__order-count">4 товара на сумму:</p>
+        <p class="cart__order-count">
+          <span class="cart__order-number">4</span> товара на сумму:
+        </p>
         <p class="cart__order-price">20&nbsp;000&nbsp;&#8381;</p>
       </div>
       <p class="cart__order-delivery">Доставка&nbsp;0&nbsp;&#8381;</p>

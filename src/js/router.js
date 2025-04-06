@@ -3,13 +3,10 @@ import { mainElem } from './components/mainElem';
 import { catalog } from './components/catalog';
 import { breadcrumb } from './components/breadcrumb';
 import { goods } from './components/goods';
+import { productSlider } from './slider';
 import { product } from './components/product';
 import { cart } from './components/cart';
 import { order } from './components/order';
-
-import { Swiper } from 'swiper';
-import { Navigation, Thumbs } from 'swiper/modules';
-import 'swiper/css';
 
 const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
 
@@ -22,24 +19,8 @@ export const initRouter = () => {
       document.body.append(mainElem([breadcrumb(), goods()]));
     })
     .on('/product', () => {
-      const thumbnailsSwiper = new Swiper('.product__slider-thumbnails', {
-        spaceBetween: 10,
-        slidesPerView: 4,
-        freeMode: true,
-        watchSlidesProgress: true,
-      });
-      new Swiper('.product__slider', {
-        spaceBetween: 10,
-        navigation: {
-          nextEl: '.product__slider-arrow_next',
-          prevEl: '.product__slider-arrow_prev',
-        },
-        modules: [Navigation, Thumbs],
-        thumbs: {
-          swiper: thumbnailsSwiper,
-        },
-      });
       document.body.append(mainElem([breadcrumb(), product()]));
+      productSlider();
     })
     .on('/cart', () => {
       document.body.append(mainElem([cart()]));
