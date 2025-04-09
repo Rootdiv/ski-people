@@ -1,3 +1,5 @@
+let rendered = false;
+
 export const layout = (child, className) => {
   const elem = document.createElement('div');
   elem.className = 'container';
@@ -7,6 +9,8 @@ export const layout = (child, className) => {
   }
 
   elem.innerHTML = child;
+
+  rendered = true;
 
   return elem;
 };

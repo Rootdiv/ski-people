@@ -7,8 +7,9 @@ import { footer } from './js/components/footer';
 
 const init = () => {
   document.body.append(header());
-  initRouter();
+  document.body.append(document.createElement('main'));
   document.body.append(footer());
+  initRouter();
 };
 
 init();

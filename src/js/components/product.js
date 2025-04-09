@@ -1,6 +1,12 @@
 import { layout } from './layout';
 
+let rendered = false;
+
 export const product = () => {
+  if (rendered) {
+    return '';
+  }
+
   const elem = document.createElement('section');
   elem.className = 'product';
 
@@ -130,6 +136,8 @@ export const product = () => {
   `;
 
   elem.append(layout(child));
+
+  rendered = true;
 
   return elem;
 };

@@ -1,6 +1,12 @@
 import { layout } from './layout';
 
+let rendered = false;
+
 export const order = () => {
+  if (rendered) {
+    return '';
+  }
+
   const elem = document.createElement('section');
   elem.className = 'order';
 
@@ -43,6 +49,8 @@ export const order = () => {
   `;
 
   elem.append(layout(child, 'order__container'));
+
+  rendered = true;
 
   return elem;
 };
