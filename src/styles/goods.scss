@@ -77,7 +77,8 @@
 
     &:hover,
     &:focus-visible,
-    &:active {
+    &:active,
+    &_active {
       color: #0044f0;
 
       .card__favorites-button-icon {

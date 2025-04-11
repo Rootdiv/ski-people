@@ -2,13 +2,19 @@ import { layout } from './layout';
 
 let rendered = false;
 
-export const breadcrumb = () => {
-  if (rendered) {
-    return '';
-  }
-
+export const breadcrumb = parent => {
   const elem = document.createElement('div');
   elem.className = 'breadcrumb';
+
+  if (parent === 'remove') {
+    document.querySelector('.breadcrumb').remove();
+    rendered = false;
+    return;
+  }
+
+  if (rendered) {
+    return document.querySelector('.breadcrumb');
+  }
 
   const child = `
     <nav class="breadcrumb__navigation">
@@ -27,6 +33,8 @@ export const breadcrumb = () => {
   `;
 
   elem.append(layout(child));
+
+  parent.append(elem);
 
   rendered = true;
 

@@ -9,6 +9,8 @@ import { cart } from './components/cart';
 import { order } from './components/order';
 import { setActiveCategory } from './setActiveCategory';
 import { getData } from './api';
+import { addFavorites } from './addFavorites';
+import { localStorageLoad } from './localStorage';
 
 const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
 
@@ -22,6 +24,7 @@ export const initRouter = () => {
         const goods = await getData();
         productList('Список товаров', goods, mainElem());
         router.updatePageLinks();
+        addFavorites(goods);
       },
       {
         already(match) {
@@ -51,12 +54,28 @@ export const initRouter = () => {
         },
       },
     )
-    .on('/favorites', () => {
-      mainElem().append(breadcrumb());
-      productList('Избранное', [], mainElem());
-    })
+    .on(
+      '/favorites',
+      async () => {
+        const goods = await getData();
+        breadcrumb(mainElem());
+        productList('Избранное', localStorageLoad('ski-people-fav'), mainElem());
+        addFavorites(goods, true);
+      },
+      {
+        already(match) {
+          match.route.handler();
+        },
+        leave(done) {
+          breadcrumb('remove');
+          productList('remove');
+          done();
+        },
+      },
+    )
     .on('/product/:id', () => {
-      mainElem().append(breadcrumb(), product());
+      breadcrumb(mainElem());
+      mainElem().append(product());
       productSlider();
     })
     .on('/cart', () => {
