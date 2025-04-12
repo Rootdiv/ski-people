@@ -73,17 +73,48 @@ export const initRouter = () => {
         },
       },
     )
-    .on('/product/:id', () => {
-      breadcrumb(mainElem());
-      mainElem().append(product());
-      productSlider();
-    })
-    .on('/cart', () => {
-      mainElem().append(cart());
-    })
-    .on('/order', () => {
-      mainElem().append(order());
-    })
+    .on(
+      '/product/:id',
+      ({ data: { id } }) => {
+        breadcrumb(mainElem());
+        product(mainElem());
+        productSlider();
+      },
+      {
+        leave(done) {
+          breadcrumb('remove');
+          product('remove');
+          done();
+        },
+      },
+    )
+    .on(
+      '/cart',
+      () => {
+        cart(mainElem());
+      },
+      {
+        already(match) {
+          match.route.handler();
+        },
+        leave(done) {
+          cart('remove');
+          done();
+        },
+      },
+    )
+    .on(
+      '/order',
+      () => {
+        order(mainElem());
+      },
+      {
+        leave(done) {
+          order('remove');
+          done();
+        },
+      },
+    )
     .notFound(() => {
       console.log('error');
     })

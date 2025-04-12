@@ -2,13 +2,19 @@ import { layout } from './layout';
 
 let rendered = false;
 
-export const product = () => {
-  if (rendered) {
-    return '';
-  }
-
+export const product = (parent, data = {}) => {
   const elem = document.createElement('section');
   elem.className = 'product';
+
+  if (parent === 'remove') {
+    document.querySelector('.product').remove();
+    rendered = false;
+    return;
+  }
+
+  if (rendered) {
+    return document.querySelector('.product');
+  }
 
   const child = `
     <h2 class="product__title">Горные лыжи</h2>
@@ -136,6 +142,8 @@ export const product = () => {
   `;
 
   elem.append(layout(child));
+
+  parent.append(elem);
 
   rendered = true;
 

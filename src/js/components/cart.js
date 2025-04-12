@@ -2,13 +2,19 @@ import { layout } from './layout';
 
 let rendered = false;
 
-export const cart = () => {
-  if (rendered) {
-    return '';
-  }
-
+export const cart = (parent, data = {}) => {
   const elem = document.createElement('section');
   elem.className = 'cart';
+
+  if (parent === 'remove') {
+    document.querySelector('.cart').remove();
+    rendered = false;
+    return;
+  }
+
+  if (rendered) {
+    return document.querySelector('.cart');
+  }
 
   const child = `
     <h2 class="cart__title">Корзина</h2>
@@ -82,6 +88,8 @@ export const cart = () => {
   `;
 
   elem.append(layout(child));
+
+  parent.append(elem);
 
   rendered = true;
 

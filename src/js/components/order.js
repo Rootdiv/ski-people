@@ -2,13 +2,19 @@ import { layout } from './layout';
 
 let rendered = false;
 
-export const order = () => {
-  if (rendered) {
-    return '';
-  }
-
+export const order = (parent, data = {}) => {
   const elem = document.createElement('section');
   elem.className = 'order';
+
+  if (parent === 'remove') {
+    document.querySelector('.order').remove();
+    rendered = false;
+    return;
+  }
+
+  if (rendered) {
+    return document.querySelector('.order');
+  }
 
   const child = `
     <div class="order__wrapper">
@@ -49,6 +55,8 @@ export const order = () => {
   `;
 
   elem.append(layout(child, 'order__container'));
+
+  parent.append(elem);
 
   rendered = true;
 
