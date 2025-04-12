@@ -11,6 +11,7 @@ import { setActiveCategory } from './setActiveCategory';
 import { getData } from './api';
 import { addFavorites } from './addFavorites';
 import { localStorageLoad } from './localStorage';
+import { page404 } from './components/page404';
 
 const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
 
@@ -115,8 +116,20 @@ export const initRouter = () => {
         },
       },
     )
-    .notFound(() => {
-      console.log('error');
-    })
+    .notFound(
+      () => {
+        page404(mainElem());
+
+        setTimeout(() => {
+          router.navigate('/');
+        }, 5000);
+      },
+      {
+        leave(done) {
+          page404('remove');
+          done();
+        },
+      },
+    )
     .resolve();
 };
