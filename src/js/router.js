@@ -47,7 +47,10 @@ export const initRouter = () => {
     .on(
       '/search',
       async ({ url, params: { page, query } }) => {
-        breadcrumb(mainElem());
+        breadcrumb(mainElem(), [
+          { text: 'Главная', href: '/' },
+          { text: 'Результаты поиска', href: '' },
+        ]);
         const currentPage = page || 1;
         const { goods, pagination } = await getData({ page, query });
         productList('Список товаров', goods, mainElem());
@@ -90,10 +93,13 @@ export const initRouter = () => {
     .on(
       '/favorites',
       async ({ url, params }) => {
+        breadcrumb(mainElem(), [
+          { text: 'Главная', href: '/' },
+          { text: 'Избранное', href: '' },
+        ]);
         const page = params ? params.page : 1;
         const list = localStorageLoad('ski-people-fav').join(',');
         const { goods, pagination } = await getData({ page, list });
-        breadcrumb(mainElem());
         productList('Избранное', goods, mainElem());
         paginationElem(mainElem(), pagination);
         paginationCounter(pagination.totalPages, `/${url}`, page);
@@ -115,7 +121,11 @@ export const initRouter = () => {
     .on(
       '/product/:id',
       ({ data: { id } }) => {
-        breadcrumb(mainElem());
+        breadcrumb(mainElem(), [
+          { text: 'Главная', href: '/' },
+          { text: 'Лыжи', href: '/ski' },
+          { text: 'Горные лыжи', href: '' },
+        ]);
         product(mainElem());
         productSlider();
       },
