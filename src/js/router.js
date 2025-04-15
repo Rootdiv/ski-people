@@ -12,64 +12,102 @@ import { getData } from './api';
 import { addFavorites } from './addFavorites';
 import { localStorageLoad } from './localStorage';
 import { page404 } from './components/page404';
+import { paginationElem } from './components/paginationElem';
+import { paginationCounter } from './paginationCounter';
 
-const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
+export const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
 
 export const initRouter = () => {
   router
     .on(
       '/',
-      async () => {
+      async ({ params }) => {
+        const page = params ? params.page : 1;
         await catalog(mainElem());
         setActiveCategory();
-        const goods = await getData();
+        const { goods, pagination } = await getData({ page });
         productList('Список товаров', goods, mainElem());
+        paginationElem(mainElem(), pagination);
+        paginationCounter(pagination.totalPages, '/', page);
+        addFavorites();
         router.updatePageLinks();
-        addFavorites(goods);
       },
       {
         already(match) {
-          match.route.handler();
+          match.route.handler(match);
         },
         leave(done) {
           catalog('remove');
           productList('remove');
+          paginationElem('remove', {});
+          done();
+        },
+      },
+    )
+    .on(
+      '/search',
+      async ({ url, params: { page, query } }) => {
+        breadcrumb(mainElem());
+        const currentPage = page || 1;
+        const { goods, pagination } = await getData({ page, query });
+        productList('Список товаров', goods, mainElem());
+        paginationElem(mainElem(), pagination);
+        paginationCounter(pagination.totalPages, `/${url}`, currentPage, query);
+        addFavorites();
+        router.updatePageLinks();
+      },
+      {
+        leave(done) {
+          breadcrumb('remove');
+          productList('remove');
+          paginationElem('remove', {});
           done();
         },
       },
     )
     .on(
       '/category',
-      async ({ params: { slug } }) => {
+      async ({ url, params: { page, slug } }) => {
         await catalog(mainElem());
         setActiveCategory(slug);
-        const goods = await getData({ category: slug });
+        const currentPage = page || 1;
+        const { goods, pagination } = await getData({ page, category: slug });
         productList('Список товаров', goods, mainElem());
+        paginationElem(mainElem(), pagination);
+        paginationCounter(pagination.totalPages, `/${url}`, currentPage, slug);
+        addFavorites();
         router.updatePageLinks();
       },
       {
         leave(done) {
           catalog('remove');
           productList('remove');
+          paginationElem('remove', {});
           done();
         },
       },
     )
     .on(
       '/favorites',
-      async () => {
-        const goods = await getData();
+      async ({ url, params }) => {
+        const page = params ? params.page : 1;
+        const list = localStorageLoad('ski-people-fav').join(',');
+        const { goods, pagination } = await getData({ page, list });
         breadcrumb(mainElem());
-        productList('Избранное', localStorageLoad('ski-people-fav'), mainElem());
-        addFavorites(goods, true);
+        productList('Избранное', goods, mainElem());
+        paginationElem(mainElem(), pagination);
+        paginationCounter(pagination.totalPages, `/${url}`, page);
+        addFavorites(true); //Передаём true на странице избранного
+        router.updatePageLinks();
       },
       {
         already(match) {
-          match.route.handler();
+          match.route.handler(match);
         },
         leave(done) {
           breadcrumb('remove');
           productList('remove');
+          paginationElem('remove', {});
           done();
         },
       },

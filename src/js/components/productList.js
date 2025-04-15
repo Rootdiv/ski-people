@@ -25,7 +25,7 @@ export const productList = (title, data, parent) => {
   const favoritesList = localStorageLoad('ski-people-fav');
 
   data.forEach(({ id, title, img, price }) => {
-    const favoritesClass = favoritesList.find(item => item.id === id)
+    const favoritesClass = favoritesList.includes(id)
       ? 'card__favorites-button card__favorites-button_active'
       : 'card__favorites-button';
 

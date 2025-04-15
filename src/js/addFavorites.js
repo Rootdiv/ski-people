@@ -1,6 +1,6 @@
 import { localStorageLoad, localStorageSave } from './localStorage';
 
-export const addFavorites = (data, isFavPage = false) => {
+export const addFavorites = (isFavPage = false) => {
   const favoritesList = localStorageLoad('ski-people-fav');
   const goodsList = document.querySelector('.goods__list');
   if (goodsList) {
@@ -8,13 +8,12 @@ export const addFavorites = (data, isFavPage = false) => {
       const favoritesButton = target.closest('.card__favorites-button');
       if (favoritesButton) {
         const id = Number(favoritesButton.dataset.id);
-        const product = data.find(item => item.id === id);
         favoritesButton.classList.add('card__favorites-button_active');
 
         let thereIs = false;
 
         favoritesList.forEach((favoriteItem, index) => {
-          if (favoriteItem.id === id) {
+          if (favoriteItem === id) {
             thereIs = true;
             favoritesList.splice(index, 1);
             localStorageSave('ski-people-fav', favoritesList);
@@ -26,7 +25,7 @@ export const addFavorites = (data, isFavPage = false) => {
         });
 
         if (!thereIs) {
-          favoritesList.push(product);
+          favoritesList.push(id);
           localStorageSave('ski-people-fav', favoritesList);
         }
       }
