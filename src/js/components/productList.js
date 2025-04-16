@@ -1,6 +1,6 @@
-import { API_URL } from '../const';
-import { layout } from './layout';
 import { localStorageLoad } from '../localStorage';
+import { API_URL, formatPrice } from '../const';
+import { layout } from './layout';
 
 let rendered = false;
 
@@ -42,7 +42,7 @@ export const productList = (title, data, parent) => {
           </button>
           <div class="card__info">
             <h3 class="card__info-title">${title}</h3>
-            <p class="card__info-price">${price}&nbsp;&#8381;</p>
+            <p class="card__info-price">${formatPrice(price)}</p>
           </div>
           <button type="button" class="card__button">В корзину</button>
         </article>

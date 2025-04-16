@@ -2,7 +2,8 @@ import { API_URL } from './const';
 
 export const getData = async param => {
   try {
-    const paramURL = param ? `?${new URLSearchParams(param)}` : '';
+    const paramURL = param.id ? `/${param.id}` : `?${new URLSearchParams(param)}`;
+
     const response = await fetch(`${API_URL}/goods${paramURL}`);
     return await response.json();
   } catch (error) {

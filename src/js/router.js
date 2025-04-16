@@ -29,7 +29,7 @@ export const initRouter = () => {
         productList('Список товаров', goods, mainElem());
         paginationElem(mainElem(), pagination);
         paginationCounter(pagination.totalPages, '/', page);
-        addFavorites();
+        addFavorites('card__favorites-button');
         router.updatePageLinks();
       },
       {
@@ -56,7 +56,7 @@ export const initRouter = () => {
         productList('Список товаров', goods, mainElem());
         paginationElem(mainElem(), pagination);
         paginationCounter(pagination.totalPages, `/${url}`, currentPage, query);
-        addFavorites();
+        addFavorites('card__favorites-button');
         router.updatePageLinks();
       },
       {
@@ -78,7 +78,7 @@ export const initRouter = () => {
         productList('Список товаров', goods, mainElem());
         paginationElem(mainElem(), pagination);
         paginationCounter(pagination.totalPages, `/${url}`, currentPage, slug);
-        addFavorites();
+        addFavorites('card__favorites-button');
         router.updatePageLinks();
       },
       {
@@ -103,7 +103,7 @@ export const initRouter = () => {
         productList('Избранное', goods, mainElem());
         paginationElem(mainElem(), pagination);
         paginationCounter(pagination.totalPages, `/${url}`, page);
-        addFavorites(true); //Передаём true на странице избранного
+        addFavorites('card__favorites-button', true); //Передаём true на странице избранного
         router.updatePageLinks();
       },
       {
@@ -120,14 +120,20 @@ export const initRouter = () => {
     )
     .on(
       '/product/:id',
-      ({ data: { id } }) => {
+      async ({ data: { id } }) => {
+        const productData = await getData({ id });
+        const { title, type, thumbsImage } = productData;
         breadcrumb(mainElem(), [
           { text: 'Главная', href: '/' },
-          { text: 'Лыжи', href: '/ski' },
-          { text: 'Горные лыжи', href: '' },
+          { text: type, href: `/category?slug=${type}` },
+          { text: title, href: '' },
         ]);
-        product(mainElem());
-        productSlider();
+        product(mainElem(), productData);
+        if (thumbsImage && thumbsImage?.length > 1) {
+          productSlider();
+        }
+        router.updatePageLinks();
+        addFavorites('product__info-favorites');
       },
       {
         leave(done) {

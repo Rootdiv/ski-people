@@ -20,7 +20,7 @@ export const breadcrumb = (parent, data) => {
     .map(
       ({ text, href }) => `
       <li class="breadcrumb__item">
-        <a ${href ?? `href="${href}"`} class="breadcrumb__link">${text}</a>
+        <a ${href ? `href="${href}"` : ''} class="breadcrumb__link">${text}</a>
       </li>`,
     )
     .join('');

@@ -60,6 +60,10 @@
         }
       }
 
+      &:disabled {
+        pointer-events: none;
+      }
+
       &-svg {
         fill-opacity: 40%;
 
@@ -145,6 +149,14 @@
 
         .product__info-favorites-icon {
           fill: currentColor;
+        }
+      }
+
+      &_active {
+        color: #0044f0;
+
+        .product__info-favorites-icon {
+          fill: #0044f0;
         }
       }
     }
