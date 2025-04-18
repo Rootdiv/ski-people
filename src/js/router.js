@@ -14,6 +14,8 @@ import { localStorageLoad } from './localStorage';
 import { page404 } from './components/page404';
 import { paginationElem } from './components/paginationElem';
 import { paginationCounter } from './paginationCounter';
+import { addToCart } from './addToCart';
+import { cartCount } from './cartCount';
 
 export const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
 
@@ -30,6 +32,7 @@ export const initRouter = () => {
         paginationElem(mainElem(), pagination);
         paginationCounter(pagination.totalPages, '/', page);
         addFavorites('card__favorites-button');
+        addToCart(goods);
         router.updatePageLinks();
       },
       {
@@ -57,6 +60,7 @@ export const initRouter = () => {
         paginationElem(mainElem(), pagination);
         paginationCounter(pagination.totalPages, `/${url}`, currentPage, query);
         addFavorites('card__favorites-button');
+        addToCart(goods);
         router.updatePageLinks();
       },
       {
@@ -79,6 +83,7 @@ export const initRouter = () => {
         paginationElem(mainElem(), pagination);
         paginationCounter(pagination.totalPages, `/${url}`, currentPage, slug);
         addFavorites('card__favorites-button');
+        addToCart(goods);
         router.updatePageLinks();
       },
       {
@@ -104,6 +109,7 @@ export const initRouter = () => {
         paginationElem(mainElem(), pagination);
         paginationCounter(pagination.totalPages, `/${url}`, page);
         addFavorites('card__favorites-button', true); //Передаём true на странице избранного
+        addToCart(goods);
         router.updatePageLinks();
       },
       {
@@ -133,6 +139,7 @@ export const initRouter = () => {
           productSlider();
         }
         router.updatePageLinks();
+        addToCart([productData]);
         addFavorites('product__info-favorites');
       },
       {
@@ -145,13 +152,16 @@ export const initRouter = () => {
     )
     .on(
       '/cart',
-      () => {
-        cart(mainElem());
+      async () => {
+        // async / await и передача goods в компонент вообще никак не виляют на результат
+        // также async / await и передача goods не нужно т.к. данные получаются в компоненте
+        const goods = await localStorageLoad('ski-people-cart');
+        cart(mainElem(), goods);
+        cartCount();
+        // не виляет на результат и вообще не нужно
+        router.updatePageLinks();
       },
       {
-        already(match) {
-          match.route.handler();
-        },
         leave(done) {
           cart('remove');
           done();

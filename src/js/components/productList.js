@@ -23,11 +23,14 @@ export const productList = (title, data, parent) => {
   let goodsItem = '';
 
   const favoritesList = localStorageLoad('ski-people-fav');
+  const cartList = localStorageLoad('ski-people-cart');
 
   data.forEach(({ id, title, img, price }) => {
     const favoritesClass = favoritesList.includes(id)
       ? 'card__favorites-button card__favorites-button_active'
       : 'card__favorites-button';
+
+    const isInCart = cartList.find(item => item.id === id);
 
     goodsItem += `
       <li class="goods__item">
@@ -44,7 +47,9 @@ export const productList = (title, data, parent) => {
             <h3 class="card__info-title">${title}</h3>
             <p class="card__info-price">${formatPrice(price)}</p>
           </div>
-          <button type="button" class="card__button">В корзину</button>
+          <button type="button" class="card__button" data-add-to-cart-id="${id}">
+            ${isInCart ? 'Из корзины' : 'В корзину'}
+          </button>
         </article>
       </li>
     `;

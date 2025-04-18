@@ -1,8 +1,10 @@
+import { API_URL, formatPrice } from '../const';
+import { localStorageLoad } from '../localStorage';
 import { layout } from './layout';
 
 let rendered = false;
 
-export const cart = (parent, data) => {
+export const cart = (parent, data = []) => {
   const elem = document.createElement('section');
   elem.className = 'cart';
 
@@ -16,40 +18,45 @@ export const cart = (parent, data) => {
     return document.querySelector('.cart');
   }
 
+  const cartList = localStorageLoad('ski-people-cart');
+
+  const totalSum = cartList.reduce((sum, item) => sum + item.count * item.price, 0);
+
+  let cartItem = '';
+
+  const render = (data, result) => {
+    console.log('data: ', data);
+    data.forEach(({ id, title, img, article, price, count }) => {
+      result += `
+        <li class="cart__item" data-id=${id}>
+          <img src="${API_URL}/${img}" alt="${title}" class="cart__item-image" />
+          <h3 class="cart__item-title">${title}</h3>
+          <p class="cart__item-price">${formatPrice(price)}</p>
+          <p class="cart__item-article">арт.&nbsp;${article}</p>
+          <div class="cart__item-counter counter" data-id="${id}">
+            <button type="button" class="counter__decrement">-</button>
+            <p class="counter__number">${count}</p>
+            <button type="button" class="counter__increment">+</button>
+          </div>
+        </li>
+      `;
+    });
+    return result;
+  };
+
   const child = `
     <h2 class="cart__title">Корзина</h2>
     <div class="cart__wrapper">
       <ul class="cart__list">
-        <li class="cart__item">
-          <img src="/images/ski-mini.jpg" alt="Горные лыжи" class="cart__item-image" />
-          <h3 class="cart__item-title">Горные лыжи</h3>
-          <p class="cart__item-price">5&nbsp;000&nbsp;&#8381;</p>
-          <p class="cart__item-article">арт.&nbsp;84348945757</p>
-          <div class="cart__item-counter counter">
-            <button type="button" class="counter__decrement">-</button>
-            <p class="counter__number">1</p>
-            <button type="button" class="counter__increment">+</button>
-          </div>
-        </li>
-        <li class="cart__item">
-          <img src="/images/ski-mini.jpg" alt="Горные лыжи" class="cart__item-image" />
-          <h3 class="cart__item-title">Горные лыжи</h3>
-          <p class="cart__item-price">5&nbsp;000&nbsp;&#8381;</p>
-          <p class="cart__item-article">арт.&nbsp;84348945757</p>
-          <div class="cart__item-counter counter">
-            <button type="button" class="counter__decrement">-</button>
-            <p class="counter__number">1</p>
-            <button type="button" class="counter__increment">+</button>
-          </div>
-        </li>
+        ${render(cartList, cartItem)}
       </ul>
       <div class="cart__order">
         <h3 class="cart__order-title">Оформление</h3>
         <div class="cart__order-info">
           <p class="cart__order-count">
-            <span class="cart__order-number">4</span> товара на сумму:
+            <span class="cart__order-number">${cartList.length}</span> товара на сумму:
           </p>
-          <p class="cart__order-price">20&nbsp;000&nbsp;&#8381;</p>
+          <p class="cart__order-price">${formatPrice(totalSum)}</p>
         </div>
         <p class="cart__order-delivery">Доставка&nbsp;0&nbsp;&#8381;</p>
         <button type="submit" form="cartForm" class="cart__order-button">Оформить заказ</button>
