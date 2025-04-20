@@ -1,8 +1,11 @@
+import { localStorageLoad } from '../localStorage';
 import { layout } from './layout';
 
 export const header = () => {
   const elem = document.createElement('header');
   elem.className = 'header';
+
+  const cartList = localStorageLoad('ski-people-cart');
 
   const child = `
     <div class="header__wrapper">
@@ -34,7 +37,7 @@ export const header = () => {
         </a>
         <a href="/cart" class="header__link">
           <span class="header__link-text">Корзина</span>
-          <span class="header__link-count">(5)</span>
+          <span class="header__link-count">(${cartList.length})</span>
           <svg width="16" height="16" class="header__link-icon">
             <use href="/images/sprite.svg#cart" />
           </svg>

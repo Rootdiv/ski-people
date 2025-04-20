@@ -102,7 +102,9 @@ export const product = (parent, data) => {
           </tr>
         </table>
         <div class="product__info-buttons">
-          <button type="button" class="product__info-to-card">В корзину</button>
+          <button type="button" class="product__info-to-card" data-add-to-cart-id="${data.id}">
+            В корзину
+          </button>
           <button type="button" class="${favoritesClass}" data-id="${data.id}">
             <svg width="16" height="16" class="product__info-favorites-icon">
               <use href="/images/sprite.svg#favorites" />

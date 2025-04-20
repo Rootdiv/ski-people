@@ -1,3 +1,4 @@
+import { API_URL, declOfNum, formatPrice } from '../const';
 import { layout } from './layout';
 
 let rendered = false;
@@ -16,43 +17,48 @@ export const cart = (parent, data) => {
     return document.querySelector('.cart');
   }
 
+  const totalSum = data.reduce((sum, item) => sum + item.count * item.price, 0);
+
+  let cartItem = '';
+
+  data.forEach(({ id, title, img, article, price, count }) => {
+    cartItem += `
+      <li class="cart__item" data-id=${id}>
+        <img src="${API_URL}/${img}" alt="${title}" class="cart__item-image" />
+        <h3 class="cart__item-title">${title}</h3>
+        <p class="cart__item-price">${formatPrice(price)}</p>
+        <p class="cart__item-article">арт.&nbsp;${article}</p>
+        <div class="cart__item-counter counter">
+          <button type="button" class="counter__decrement">-</button>
+          <p class="counter__number">${count}</p>
+          <button type="button" class="counter__increment">+</button>
+        </div>
+      </li>
+    `;
+  });
+
   const child = `
     <h2 class="cart__title">Корзина</h2>
     <div class="cart__wrapper">
       <ul class="cart__list">
-        <li class="cart__item">
-          <img src="/images/ski-mini.jpg" alt="Горные лыжи" class="cart__item-image" />
-          <h3 class="cart__item-title">Горные лыжи</h3>
-          <p class="cart__item-price">5&nbsp;000&nbsp;&#8381;</p>
-          <p class="cart__item-article">арт.&nbsp;84348945757</p>
-          <div class="cart__item-counter counter">
-            <button type="button" class="counter__decrement">-</button>
-            <p class="counter__number">1</p>
-            <button type="button" class="counter__increment">+</button>
-          </div>
-        </li>
-        <li class="cart__item">
-          <img src="/images/ski-mini.jpg" alt="Горные лыжи" class="cart__item-image" />
-          <h3 class="cart__item-title">Горные лыжи</h3>
-          <p class="cart__item-price">5&nbsp;000&nbsp;&#8381;</p>
-          <p class="cart__item-article">арт.&nbsp;84348945757</p>
-          <div class="cart__item-counter counter">
-            <button type="button" class="counter__decrement">-</button>
-            <p class="counter__number">1</p>
-            <button type="button" class="counter__increment">+</button>
-          </div>
-        </li>
+        ${cartItem}
       </ul>
       <div class="cart__order">
         <h3 class="cart__order-title">Оформление</h3>
         <div class="cart__order-info">
-          <p class="cart__order-count">
-            <span class="cart__order-number">4</span> товара на сумму:
-          </p>
-          <p class="cart__order-price">20&nbsp;000&nbsp;&#8381;</p>
+          <p class="cart__order-count">${declOfNum(data.length, [
+            'товар',
+            'товара',
+            'товаров',
+          ])} на сумму:</p>
+          <p class="cart__order-price">${formatPrice(totalSum)}</p>
         </div>
         <p class="cart__order-delivery">Доставка&nbsp;0&nbsp;&#8381;</p>
-        <button type="submit" form="cartForm" class="cart__order-button">Оформить заказ</button>
+        <button type="submit" form="cartForm" class="cart__order-button" ${
+          data.length ? '' : 'disabled'
+        }>
+          Оформить заказ
+        </button>
       </div>
       <form id="cartForm" action="#" method="POST" class="cart__form">
         <h3 class="cart__form-title">Данные для доставки</h3>

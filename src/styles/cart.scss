@@ -170,6 +170,11 @@
       padding: 12px 24px;
       background-color: #0044f0;
       color: #ffffff;
+
+      &:disabled {
+        pointer-events: none;
+        opacity: 20%;
+      }
     }
   }
 
@@ -194,6 +199,7 @@
     }
 
     &-title {
+      grid-area: 1 / span 2;
       font-weight: 400;
       font-size: 16px;
 
@@ -353,5 +359,22 @@
         background-color: #eeeff2;
       }
     }
+  }
+}
+
+.counter {
+  &__decrement {
+    width: 14px;
+    height: 14px;
+  }
+
+  &__number {
+    min-width: 14px;
+    text-align: center;
+  }
+
+  &__increment {
+    width: 14px;
+    height: 14px;
   }
 }
