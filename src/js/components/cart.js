@@ -1,5 +1,6 @@
-import { API_URL, declOfNum, formatPrice } from '../const';
+import { API_URL } from '../const';
 import { layout } from './layout';
+import { declOfNum, formatPrice, totalSum } from '../helpers';
 
 let rendered = false;
 
@@ -17,14 +18,12 @@ export const cart = (parent, data) => {
     return document.querySelector('.cart');
   }
 
-  const totalSum = data.reduce((sum, item) => sum + item.count * item.price, 0);
-
   let cartItem = '';
 
   data.forEach(({ id, title, img, article, price, count }) => {
     cartItem += `
       <li class="cart__item" data-id=${id}>
-        <img src="${API_URL}/${img}" alt="${title}" class="cart__item-image" />
+        <img src="${API_URL}/${img}" alt="${title}" class="cart__item-image" required />
         <h3 class="cart__item-title">${title}</h3>
         <p class="cart__item-price">${formatPrice(price)}</p>
         <p class="cart__item-article">арт.&nbsp;${article}</p>
@@ -51,7 +50,7 @@ export const cart = (parent, data) => {
             'товара',
             'товаров',
           ])} на сумму:</p>
-          <p class="cart__order-price">${formatPrice(totalSum)}</p>
+          <p class="cart__order-price">${formatPrice(totalSum(data))}</p>
         </div>
         <p class="cart__order-delivery">Доставка&nbsp;0&nbsp;&#8381;</p>
         <button type="submit" form="cartForm" class="cart__order-button" ${
@@ -66,10 +65,10 @@ export const cart = (parent, data) => {
           <input
             type="text"
             class="cart__form-input"
-            name="name"
-            placeholder="Фамилия Имя Отчество" />
-          <input type="tel" class="cart__form-input" name="phone" placeholder="Телефон" />
-          <input type="email" class="cart__form-input" name="email" placeholder="E-mail" />
+            name="name" required
+            placeholder="Фамилия Имя Отчество" required />
+          <input type="tel" class="cart__form-input" name="phone" required placeholder="Телефон" required />
+          <input type="email" class="cart__form-input" name="email" required placeholder="E-mail" required />
           <input
             type="text"
             class="cart__form-input"
@@ -83,22 +82,22 @@ export const cart = (parent, data) => {
         <fieldset class="cart__form-fieldset">
           <legend class="cart__form-legend">Доставка</legend>
           <label class="cart__form-label">
-            <input type="radio" name="deliveryType" value="delivery" class="cart__form-radio" />
+            <input type="radio" name="deliveryType" value="delivery" class="cart__form-radio" required />
             Доставка
           </label>
           <label class="cart__form-label">
-            <input type="radio" name="deliveryType" value="pickup" class="cart__form-radio" />
+            <input type="radio" name="deliveryType" value="pickup" class="cart__form-radio" required />
             Самовывоз
           </label>
         </fieldset>
         <fieldset class="cart__form-fieldset">
           <legend class="cart__form-legend">Оплата</legend>
           <label class="cart__form-label">
-            <input type="radio" name="paymentType" value="card" class="cart__form-radio" />
+            <input type="radio" name="paymentType" value="card" class="cart__form-radio" required />
             Картой при получении
           </label>
           <label class="cart__form-label">
-            <input type="radio" name="paymentType" value="cash" class="cart__form-radio" />
+            <input type="radio" name="paymentType" value="cash" class="cart__form-radio" required />
             Наличными при получении
           </label>
         </fieldset>

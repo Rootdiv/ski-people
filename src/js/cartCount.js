@@ -1,4 +1,4 @@
-import { declOfNum, formatPrice } from './const';
+import { declOfNum, formatPrice, totalSum } from './helpers';
 import { localStorageSave } from './localStorage';
 
 export const cartCount = data => {
@@ -36,8 +36,7 @@ export const cartCount = data => {
         }
       });
 
-      const totalSum = data.reduce((sum, item) => sum + item.count * item.price, 0);
-      cartOrderPrice.textContent = formatPrice(totalSum);
+      cartOrderPrice.textContent = formatPrice(totalSum(data));
       localStorageSave('ski-people-cart', data);
     });
   }

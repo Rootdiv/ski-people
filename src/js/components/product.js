@@ -1,6 +1,7 @@
 import { localStorageLoad } from '../localStorage';
-import { API_URL, formatPrice } from '../const';
+import { API_URL } from '../const';
 import { layout } from './layout';
+import { formatPrice } from '../helpers';
 
 let rendered = false;
 

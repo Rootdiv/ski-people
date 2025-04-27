@@ -16,6 +16,8 @@ import { paginationElem } from './components/paginationElem';
 import { paginationCounter } from './paginationCounter';
 import { addToCart } from './addToCart';
 import { cartCount } from './cartCount';
+import { sendOrder } from './sendOrder';
+import { checkDelivery } from './checkDelivery';
 
 export const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
 
@@ -156,6 +158,8 @@ export const initRouter = () => {
         const cartList = localStorageLoad('ski-people-cart');
         cart(mainElem(), cartList);
         cartCount(cartList);
+        checkDelivery();
+        sendOrder(cartList);
       },
       {
         already(match) {
@@ -168,9 +172,11 @@ export const initRouter = () => {
       },
     )
     .on(
-      '/order',
-      () => {
-        order(mainElem());
+      '/order/:id',
+      ({ data: { id } }) => {
+        const orderId = Number(id);
+        const orders = localStorageLoad('ski-people-order');
+        order(mainElem(), orders[orderId]);
       },
       {
         leave(done) {

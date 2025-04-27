@@ -248,6 +248,11 @@
       &::placeholder {
         color: #969eae;
       }
+
+      &:disabled {
+        opacity: 50%;
+        pointer-events: none;
+      }
     }
 
     &-textarea {
