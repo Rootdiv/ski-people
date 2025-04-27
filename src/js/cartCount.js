@@ -6,6 +6,7 @@ export const cartCount = data => {
   const headerCount = document.querySelector('.header__link-count');
   const cartOrderPrice = document.querySelector('.cart__order-price');
   const cartOrderCount = document.querySelector('.cart__order-count');
+  const cartOrderButton = document.querySelector('.cart__order-button');
 
   if (cartList) {
     cartList.addEventListener('click', ({ target }) => {
@@ -37,6 +38,7 @@ export const cartCount = data => {
       });
 
       cartOrderPrice.textContent = formatPrice(totalSum(data));
+      cartOrderButton.disabled = data.length === 0;
       localStorageSave('ski-people-cart', data);
     });
   }
