@@ -2,20 +2,18 @@ import { API_URL } from '../const';
 import { layout } from './layout';
 import { declOfNum, formatPrice, totalSum } from '../helpers';
 
-let rendered = false;
-
 export const cart = (parent, data) => {
+  const mountElem = document.querySelector('.cart');
   const elem = document.createElement('section');
   elem.className = 'cart';
 
   if (parent === 'remove') {
-    document.querySelector('.cart').remove();
-    rendered = false;
+    mountElem.remove();
     return;
   }
 
-  if (rendered) {
-    return document.querySelector('.cart');
+  if (mountElem) {
+    return mountElem;
   }
 
   let cartItem = '';
@@ -108,8 +106,6 @@ export const cart = (parent, data) => {
   elem.append(layout(child));
 
   parent.append(elem);
-
-  rendered = true;
 
   return elem;
 };

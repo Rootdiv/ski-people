@@ -1,19 +1,17 @@
 import { layout } from './layout';
 
-let rendered = false;
-
 export const page404 = parent => {
+  const mountElem = document.querySelector('.error');
   const elem = document.createElement('section');
   elem.className = 'error';
 
   if (parent === 'remove') {
-    document.querySelector('.error').remove();
-    rendered = false;
+    mountElem.remove();
     return;
   }
 
-  if (rendered) {
-    return document.querySelector('.error');
+  if (mountElem) {
+    return mountElem;
   }
 
   const child = `
@@ -26,8 +24,6 @@ export const page404 = parent => {
   elem.append(layout(child));
 
   parent.append(elem);
-
-  rendered = true;
 
   return elem;
 };

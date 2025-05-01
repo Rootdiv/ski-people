@@ -3,20 +3,18 @@ import { API_URL } from '../const';
 import { layout } from './layout';
 import { formatPrice } from '../helpers';
 
-let rendered = false;
-
 export const product = (parent, data) => {
+  const mountElem = document.querySelector('.product');
   const elem = document.createElement('section');
   elem.className = 'product';
 
   if (parent === 'remove') {
-    document.querySelector('.product').remove();
-    rendered = false;
+    mountElem.remove();
     return;
   }
 
-  if (rendered) {
-    return document.querySelector('.product');
+  if (mountElem) {
+    return mountElem;
   }
 
   const favoritesList = localStorageLoad('ski-people-fav');
@@ -119,8 +117,6 @@ export const product = (parent, data) => {
   elem.append(layout(child));
 
   parent.append(elem);
-
-  rendered = true;
 
   return elem;
 };

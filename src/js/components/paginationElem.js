@@ -1,12 +1,9 @@
 import { layout } from './layout';
 
-let rendered = false;
-
 export const paginationElem = (parent, { currentPage, totalPages, totalGoods, limit }) => {
   const renderedElem = document.querySelector('.pagination');
   if (parent === 'remove') {
     renderedElem.remove();
-    rendered = false;
     return;
   }
 
@@ -37,14 +34,12 @@ export const paginationElem = (parent, { currentPage, totalPages, totalGoods, li
 
   elem.append(layout(child, 'pagination__container'));
 
-  if (rendered) {
+  if (renderedElem) {
     renderedElem.innerHTML = elem.innerHTML;
     return renderedElem;
   }
 
   parent.append(elem);
-
-  rendered = true;
 
   return elem;
 };

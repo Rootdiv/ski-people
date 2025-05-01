@@ -1,20 +1,18 @@
 import { getCategories } from '../api';
 import { layout } from './layout';
 
-let rendered = false;
-
 export const catalog = async parent => {
+  const mountElem = document.querySelector('.catalog');
   const elem = document.createElement('div');
   elem.className = 'catalog';
 
   if (parent === 'remove') {
-    document.querySelector('.catalog').remove();
-    rendered = false;
+    mountElem.remove();
     return;
   }
 
-  if (rendered) {
-    return document.querySelector('.catalog');
+  if (mountElem) {
+    return mountElem;
   }
 
   const typeList = await getCategories();
@@ -41,8 +39,6 @@ export const catalog = async parent => {
   elem.append(layout(child));
 
   parent.append(elem);
-
-  rendered = true;
 
   return elem;
 };

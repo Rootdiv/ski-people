@@ -1,21 +1,18 @@
 import { formatPrice } from '../helpers';
 import { layout } from './layout';
 
-let rendered = false;
-
 export const order = (parent, data) => {
-  console.log('data: ', data);
+  const mountElem = document.querySelector('.order');
   const elem = document.createElement('section');
   elem.className = 'order';
 
   if (parent === 'remove') {
-    document.querySelector('.order').remove();
-    rendered = false;
+    mountElem.remove();
     return;
   }
 
-  if (rendered) {
-    return document.querySelector('.order');
+  if (mountElem) {
+    return mountElem;
   }
 
   if (!data) {
@@ -27,8 +24,6 @@ export const order = (parent, data) => {
     elem.append(layout(childEmpty, 'order__container'));
 
     parent.append(elem);
-
-    rendered = true;
 
     return elem;
   }
@@ -82,8 +77,6 @@ export const order = (parent, data) => {
   elem.append(layout(child, 'order__container'));
 
   parent.append(elem);
-
-  rendered = true;
 
   return elem;
 };

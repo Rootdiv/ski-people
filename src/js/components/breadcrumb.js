@@ -1,19 +1,17 @@
 import { layout } from './layout';
 
-let rendered = false;
-
 export const breadcrumb = (parent, data) => {
+  const mountElem = document.querySelector('.breadcrumb');
   const elem = document.createElement('div');
   elem.className = 'breadcrumb';
 
   if (parent === 'remove') {
-    document.querySelector('.breadcrumb').remove();
-    rendered = false;
+    mountElem.remove();
     return;
   }
 
-  if (rendered) {
-    return document.querySelector('.breadcrumb');
+  if (mountElem) {
+    return mountElem;
   }
 
   const listItems = data
@@ -36,8 +34,6 @@ export const breadcrumb = (parent, data) => {
   elem.append(layout(child));
 
   parent.append(elem);
-
-  rendered = true;
 
   return elem;
 };

@@ -3,15 +3,13 @@ import { API_URL } from '../const';
 import { layout } from './layout';
 import { formatPrice } from '../helpers';
 
-let rendered = false;
-
 export const productList = (title, data, parent) => {
+  const mountElem = document.querySelector('.goods');
   const elem = document.createElement('section');
   elem.className = 'goods';
 
   if (title === 'remove') {
-    document.querySelector('.goods').remove();
-    rendered = false;
+    mountElem.remove();
     return;
   }
 
@@ -65,14 +63,12 @@ export const productList = (title, data, parent) => {
 
   elem.append(layout(child, 'goods__container'));
 
-  if (rendered) {
-    document.querySelector('.goods').innerHTML = elem.innerHTML;
-    return document.querySelector('.goods');
+  if (mountElem) {
+    mountElem.innerHTML = elem.innerHTML;
+    return mountElem;
   }
 
   parent.append(elem);
-
-  rendered = true;
 
   return elem;
 };
